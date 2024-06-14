@@ -8,6 +8,8 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import GridEffectSection from "@/components/HeroSection/GridEffectSection";
+import AnimatedCounter from "@/components/AnimatedCounter/AnimatedCounter";
 const gridContainerVarients = {
   hidden: {
     opacity: 0,
@@ -40,7 +42,11 @@ function Home() {
     offset: ["start end", "end end"],
   });
   const paragraphValue = useTransform(scrollYProgress, [0, 1], ["100%", "0%"]);
-  const paragraphValue2 = useTransform(scrollYProgress, [0, 1], ["-100%", "0%"]);
+  const paragraphValue2 = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["-100%", "0%"]
+  );
   useEffect(() => {
     if (isInView) {
       mainControls.start("visible");
@@ -49,6 +55,10 @@ function Home() {
   return (
     <div>
       <Menu />
+      <GridEffectSection />
+      <main className="text-3xl font-bold font-mono flex min-h-screen justify-center flex-col items-center p-4">
+        <AnimatedCounter from={0} to={10000} />
+      </main>
       <div className="flex flex-col gap-10 overflow-x-hidden">
         <motion.section
           variants={gridContainerVarients}
@@ -174,7 +184,7 @@ function Home() {
         </motion.section>
         <section className="flex flex-col gap-10 mb-10">
           <motion.h1
-            className="text-5xl tracking-wide text-slate-100 text-center"
+            className="h1 text-5xl tracking-wide text-slate-100 text-center"
             animate={mainControls}
             initial="hidden"
             variants={{
