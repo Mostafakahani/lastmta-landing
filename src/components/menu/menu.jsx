@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
-import { useIsomorphicLayoutEffect } from "@gsap/react";
+import { motion } from "framer-motion";
 
 const menuList = [
   { path: "/", label: "خانه" },
@@ -49,7 +49,7 @@ function Menu() {
   }, [isMenuOpen]);
 
   return (
-    <div className="fixed top-0 left-0 w-full z-10" ref={container}>
+    <div className="fixed top-0 left-0 w-full z-50" ref={container}>
       <div className="flex justify-between items-center p-4">
         <div>
           <Link className="text-white" href="/">
@@ -61,37 +61,41 @@ function Menu() {
         </div>
       </div>
       <div className="menu-overlay fixed top-0 left-0 w-full h-screen bg-lime-400 flex flex-col p-4">
-        <div className="flex justify-between items-center mb-4">
+        {/* <div className="flex justify-between items-center mb-4">
           <div>
             <Link href="/">LasTMTA</Link>
           </div>
           <div className="cursor-pointer" onClick={toggleMenu}>
             <p className="text-white">Close</p>
           </div>
-        </div>
-        <div
+        </div> */}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          whileHover={{ scale: 1.1, rotate: 45 }}
           className="text-black text-9xl leading-none cursor-pointer mb-8"
           onClick={toggleMenu}
         >
           &#x2715;
-        </div>
-        <div className="flex flex-col justify-between flex-grow">
+        </motion.div>
+        <div className="flex w-full items-center flex-col justify-between flex-grow">
           <div>
             <div className="flex flex-col space-y-4">
               {menuList.map((link, index) => (
                 <div className="menu-link-item clip-path-inset-0" key={index}>
                   <div className="menu-link-item-holder">
-                    <Link href={link.path} legacyBehavior>
-                      <a className="text-black text-6xl md:text-8xl font-normal">
-                        {link.label}
-                      </a>
+                    <Link
+                      href={link.path}
+                      className="text-black text-6xl md:text-8xl font-normal transition-all hover:text-white"
+                    >
+                      {link.label}
                     </Link>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="flex space-x-8 mb-4">
+          {/* <div className="flex w-full justify-between space-x-8 mb-4">
             <div className="flex flex-col space-y-2">
               <a href="#">Link 1</a>
               <a href="#">Link 2</a>
@@ -103,10 +107,10 @@ function Menu() {
               <a href="#">Link 6</a>
               <a href="#">Link 7</a>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="flex justify-end items-end">
-          <p>View Link</p>
+          <p>توسعه توسط تیم LasT</p>
         </div>
       </div>
     </div>
